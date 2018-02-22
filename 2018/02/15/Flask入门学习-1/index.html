@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Summary">
+<meta name="description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
 <meta name="keywords" content="Python,Flask">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flask入门学习&lt;1&gt;">
 <meta property="og:url" content="http://yoursite.com/2018/02/15/Flask入门学习-1/index.html">
 <meta property="og:site_name" content="Matt Rafael的博客">
-<meta property="og:description" content="Summary">
+<meta property="og:description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-22T13:44:26.237Z">
+<meta property="og:updated_time" content="2018-02-22T14:46:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flask入门学习&lt;1&gt;">
-<meta name="twitter:description" content="Summary">
+<meta name="twitter:description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
 
 
 
@@ -342,7 +342,7 @@
       
 
       
-        <p>Summary<br><a id="more"></a></p>
+        <p>该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单<br><a id="more"></a></p>
 <h4 id="安装Flask"><a href="#安装Flask" class="headerlink" title="安装Flask"></a>安装Flask</h4><p>虚拟环境是Python解释器的一份拷贝，可以在里面私有地安装包。</p>
 <pre><code>$ python3 -m venv matt 创建名字为matt的虚拟环境
 $ source matt/bin/activate 激活matt目录下的虚拟环境
@@ -355,21 +355,66 @@ app = Flask(__name__)
 
 所有的Flask应用必须创建应用实例，服务器将所有的请求都交给该对象处理。Flask使用__name__这个参数来决定应用的根路径。
 </code></pre><p>路由和视图函数</p>
-<pre><code>通过app.route装饰器来定义路由
-@app.route(&apos;/&apos;)
-def index():
-    return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
+<pre><code>    通过app.route装饰器来定义路由
+    @app.route(&apos;/&apos;)
+    def index():
+        return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
 
-通过app.add_url_rule()方法来定义路由
-def index():
-    return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
-app.add_url_rule(&apos;/&apos;, &apos;index&apos;, index)
+    通过app.add_url_rule()方法来定义路由
+    def index():
+        return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
+    app.add_url_rule(&apos;/&apos;, &apos;index&apos;, index)
 
-使用&lt;&gt;来支持动态路由
-@app.route(&apos;/user/&lt;name&gt;&apos;)
-def user(name):
-    return &apos;&lt;h1&gt;Hello, {}&apos;.format(name)
-</code></pre>
+    使用&lt;&gt;来支持动态路由
+    @app.route(&apos;/user/&lt;name&gt;&apos;)
+    def user(name):
+        return &apos;&lt;h1&gt;Hello, {}&apos;.format(name)
+
+开发服务器
+
+        使用flask run命令开启服务器，该命令需要寻找包含应用实例的脚本
+        $ export FLASK_APP=main.py
+        $ flask run
+
+        通过调用app.run()方法来语法式地开启服务器：
+        if __name__ == &apos;__main__&apos;:
+            app.run()
+
+调试模式
+
+        调试模式下，开发服务器的两个模块reloader和debugger默认开启。源文件改变的时候，reloader会自动重启服务器。当应用抛出异常时，debugger就会出现在浏览器中。
+
+        命令行开启调试模式：
+        $ export FLASK_APP=main.py
+        $ export FLASK_DEBUG=1
+        $ flask run
+
+        语法式开启调试模式：
+        app.run(debug=True)
+</code></pre><h4 id="请求-响应"><a href="#请求-响应" class="headerlink" title="请求-响应"></a>请求-响应</h4><p>应用和请求上下文</p>
+<pre><code>    Flask接收到来自客户端的请求时，需要让处理请求的视图函数能够获取到一些对象，比如request对象。
+
+    Flask使用上下文来暂时让某些对象可全局获取：
+
+    from flask import request
+    @app.route(&apos;/&apos;)
+    def index():
+            user_agent = request.headers.get(&apos;User_Agent&apos;)
+            return &apos;&lt;p&gt;Your browser is {} &lt;p&gt;&apos;.format(user_agent)
+
+
+        Flask的上下文全局变量：current_app、g、request、response
+
+
+请求钩子
+
+        在请求被处理之前或之后执行代码，使用钩子来实现：
+         before_first_request：第一个请求被处理之前执行
+         before_request：每个请求被处理之前执行
+         after_request：每个请求被处理之后执行，前提是没有异常发生
+         teardown_request：每个请求被处理之后执行，就算异常发生
+</code></pre><p>   响应对象</p>
+
       
     </div>
     
@@ -525,7 +570,7 @@ def user(name):
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Flask"><span class="nav-number">1.</span> <span class="nav-text">安装Flask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用结构"><span class="nav-number">2.</span> <span class="nav-text">应用结构</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Flask"><span class="nav-number">1.</span> <span class="nav-text">安装Flask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用结构"><span class="nav-number">2.</span> <span class="nav-text">应用结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求-响应"><span class="nav-number">3.</span> <span class="nav-text">请求-响应</span></a></li></ol></div>
             
 
           </div>
