@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Matt Rafael的博客">
 <meta property="og:description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-22T14:46:36.000Z">
+<meta property="og:updated_time" content="2018-02-23T10:03:15.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flask入门学习&lt;1&gt;">
 <meta name="twitter:description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
@@ -355,66 +355,199 @@ app = Flask(__name__)
 
 所有的Flask应用必须创建应用实例，服务器将所有的请求都交给该对象处理。Flask使用__name__这个参数来决定应用的根路径。
 </code></pre><p>路由和视图函数</p>
-<pre><code>    通过app.route装饰器来定义路由
-    @app.route(&apos;/&apos;)
-    def index():
-        return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
+<pre><code>通过app.route装饰器来定义路由
+@app.route(&apos;/&apos;)
+def index():
+    return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
 
-    通过app.add_url_rule()方法来定义路由
-    def index():
-        return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
-    app.add_url_rule(&apos;/&apos;, &apos;index&apos;, index)
+通过app.add_url_rule()方法来定义路由
+def index():
+    return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
+app.add_url_rule(&apos;/&apos;, &apos;index&apos;, index)
 
-    使用&lt;&gt;来支持动态路由
-    @app.route(&apos;/user/&lt;name&gt;&apos;)
-    def user(name):
-        return &apos;&lt;h1&gt;Hello, {}&apos;.format(name)
+使用&lt;&gt;来支持动态路由
+@app.route(&apos;/user/&lt;name&gt;&apos;)
+def user(name):
+    return &apos;&lt;h1&gt;Hello, {}&apos;.format(name)
+</code></pre><p>开发服务器</p>
+<pre><code>使用flask run命令开启服务器，该命令需要寻找包含应用实例的脚本
+$ export FLASK_APP=main.py
+$ flask run
 
-开发服务器
+通过调用app.run()方法来语法式地开启服务器：
+if __name__ == &apos;__main__&apos;:
+    app.run()
+</code></pre><p>调试模式</p>
+<pre><code>调试模式下，开发服务器的两个模块reloader和debugger默认开启。源文件改变的时候，reloader会自动重启服务器。当应用抛出异常时，debugger就会出现在浏览器中。
 
-        使用flask run命令开启服务器，该命令需要寻找包含应用实例的脚本
-        $ export FLASK_APP=main.py
-        $ flask run
+命令行开启调试模式：
+$ export FLASK_APP=main.py
+$ export FLASK_DEBUG=1
+$ flask run
 
-        通过调用app.run()方法来语法式地开启服务器：
-        if __name__ == &apos;__main__&apos;:
-            app.run()
-
-调试模式
-
-        调试模式下，开发服务器的两个模块reloader和debugger默认开启。源文件改变的时候，reloader会自动重启服务器。当应用抛出异常时，debugger就会出现在浏览器中。
-
-        命令行开启调试模式：
-        $ export FLASK_APP=main.py
-        $ export FLASK_DEBUG=1
-        $ flask run
-
-        语法式开启调试模式：
-        app.run(debug=True)
+语法式开启调试模式：
+app.run(debug=True)
 </code></pre><h4 id="请求-响应"><a href="#请求-响应" class="headerlink" title="请求-响应"></a>请求-响应</h4><p>应用和请求上下文</p>
-<pre><code>    Flask接收到来自客户端的请求时，需要让处理请求的视图函数能够获取到一些对象，比如request对象。
+<pre><code>Flask接收到来自客户端的请求时，需要让处理请求的视图函数能够获取到一些对象，比如request对象。
 
-    Flask使用上下文来暂时让某些对象可全局获取：
+Flask使用上下文来暂时让某些对象可全局获取：
 
-    from flask import request
-    @app.route(&apos;/&apos;)
-    def index():
-            user_agent = request.headers.get(&apos;User_Agent&apos;)
-            return &apos;&lt;p&gt;Your browser is {} &lt;p&gt;&apos;.format(user_agent)
-
-
-        Flask的上下文全局变量：current_app、g、request、response
+from flask import request
+@app.route(&apos;/&apos;)
+def index():
+        user_agent = request.headers.get(&apos;User_Agent&apos;)
+        return &apos;&lt;p&gt;Your browser is {} &lt;p&gt;&apos;.format(user_agent)
 
 
-请求钩子
-
-        在请求被处理之前或之后执行代码，使用钩子来实现：
-         before_first_request：第一个请求被处理之前执行
-         before_request：每个请求被处理之前执行
-         after_request：每个请求被处理之后执行，前提是没有异常发生
-         teardown_request：每个请求被处理之后执行，就算异常发生
+    Flask的上下文全局变量：current_app、g、request、response
+</code></pre><p>   请求钩子</p>
+<pre><code>在请求被处理之前或之后执行代码，使用钩子来实现：
+ before_first_request：第一个请求被处理之前执行
+ before_request：每个请求被处理之前执行
+ after_request：每个请求被处理之后执行，前提是没有异常发生
+ teardown_request：每个请求被处理之后执行，就算异常发生
 </code></pre><p>   响应对象</p>
+<pre><code>返回tuple作为响应：
+@app.route(&apos;/&apos;)
+def index():
+    return &apos;&lt;h1&gt;Bad Request&lt;h1&gt;&apos;, 400
 
+返回response对象：
+from flask import make_response
+@app.route(&apos;/&apos;)
+def index():
+    response = make_response(&apos;&lt;h1&gt;This document carries a cookie&lt;h1&gt;&apos;)
+    response.set_cookie(&apos;answer&apos;, &apos;42&apos;)
+    return response
+
+
+重定向：
+from flask import redirect
+@app.route(&apos;/&apos;)
+def index():
+    return redirect(&apos;https://www.baidu.com&apos;)
+
+abort()函数用于错误处理：
+from flask import abort
+@app.route(&apos;/user/&lt;id&gt;&apos;)
+def get_user(id):
+    user = load_user(id)
+    if not user:
+        abort(404)
+    return &apos;&lt;h1&gt;Hello, {}&lt;h1&gt;&apos;.format(user.name)
+</code></pre><h4 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h4><pre><code>默认Flask寻找位于应用主目录下名字是templates子目录的模板
+
+templates/index.html：
+&lt;h1&gt;Hello, World&lt;/h1&gt;
+
+templates/user.html：
+&lt;h1&gt;Hello, {{ name }}&lt;h1&gt;
+
+main.py：
+from flask import Flask, render_template
+app = Flask(__name__)
+
+@app.route(&apos;/&apos;)
+def index():
+        return render_template(&apos;index.html&apos;)
+
+@app.route(&apos;/user/&lt;name&gt;&apos;)
+def user(name):
+        return render_template(&apos;user.html&apos;, name=name)
+
+    Jinja2识别任何类型的变量，甚至是列表，字典和对象。可以使用过滤器来修改变量：Hello, {{ name | capitalize }}
+</code></pre><p> 控制结构</p>
+<pre><code>{% if user %}
+ 			Hello, {{ user }}
+ 		{% else %}
+ 			Hello, Stranger
+ 		{% endif %}
+
+&lt;ul&gt;
+    {% for comment in comments %}
+ 				<li> {{ comment }}</li>
+ 			{% endfor %}
+&lt;/ul&gt;
+
+   多个地方用到的模板代码可以放在单独文件中：
+   {% include 'common.html' %}
+
+   模板继承：
+
+   base.html：
+   &lt;html&gt;
+   &lt;head&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+       {% block body %}
+    			{% endblock %}
+   &lt;/body&gt;
+   &lt;/html&gt;
+
+   detail.html：
+   {% extends "base.html" %}
+   &lt;html&gt;
+   &lt;head&gt;
+   &lt;/head&gt;
+   &lt;body&gt;
+       {% block body %}
+    				<h1>Hello,World</h1>
+    			{% endblock %}
+   &lt;/body&gt;
+   &lt;/html&gt;
+</code></pre><p>  Bootstra集成</p>
+<pre><code>$ pip install flask-bootstrap
+
+集成：
+from flask_bootstrap import Bootstrap
+bootstrap = Bootstrap(app)
+
+Flask-Bootstrap初始化后，应用便可获取包含Boostrap文件和基本结构的模板，然后利用Jinja2的模板继承的特点。
+</code></pre><p>自定义错误页</p>
+<pre><code>客户端请求的页面或路由不存在时，抛出404；应用有未处理的异常时，抛出500。
+@app.errorhandler(404)
+def  page_not_found(e):
+    return render_template(&apos;404.html&apos;), 404
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template(&apos;500.html&apos;), 500
+</code></pre><p>链接</p>
+<pre><code>url_for()函数产生URL，该函数接收视图函数名或者端点名。
+url_for(&apos;index&apos;)返回相对路径
+url_for(&apos;index&apos;, _external=True)返回绝对路径
+
+动态URL可以通过传递参数来产生：
+url_for(&apos;user&apos;, name=&apos;matt&apos;, _external=True)
+
+查询字符串也可以作为参数传递：
+url_for(&apos;user&apos;, name=&apos;matt&apos;, page=1, _external=True) page就是查询字符串
+</code></pre><p>静态文件</p>
+<pre><code>静态文件默认放在应用根目录下名字叫static的子目录下。
+url_for(&apos;static&apos;, filename=&apos;css/style.css&apos;, _external=True)
+</code></pre><h4 id="Web表单"><a href="#Web表单" class="headerlink" title="Web表单"></a>Web表单</h4><pre><code>$ pip install flask-wtf
+
+Flask-WTF扩展不需要初始化，但是它需要应用配置secret key。
+app = Flask(__name__)
+app.config[&apos;SECRET_KEY&apos;] = &apos;secret_string&apos;
+</code></pre><p>表单类</p>
+<pre><code>from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
+class NameForm(FlaskForm):
+        name = StringField(&apos;What is your name?&apos;, validators=[DataRequired()])
+        submit = SubmitField(&apos;Submit&apos;)
+
+    @app.route(&apos;/&apos;, methods=[&apos;GET&apos;,&apos;POST&apos;])
+def index():
+        name = None
+       form = NameForm()
+        if form.validate_on_submit():
+                name = form.name.data
+             form.name.data = &apos;&apos;
+        return render_template(&apos;index.html&apos;, form=form, name=name)
+</code></pre>
       
     </div>
     
@@ -570,7 +703,7 @@ app = Flask(__name__)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Flask"><span class="nav-number">1.</span> <span class="nav-text">安装Flask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用结构"><span class="nav-number">2.</span> <span class="nav-text">应用结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求-响应"><span class="nav-number">3.</span> <span class="nav-text">请求-响应</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Flask"><span class="nav-number">1.</span> <span class="nav-text">安装Flask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用结构"><span class="nav-number">2.</span> <span class="nav-text">应用结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求-响应"><span class="nav-number">3.</span> <span class="nav-text">请求-响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模板"><span class="nav-number">4.</span> <span class="nav-text">模板</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number"></span> <span class="nav-text">Hello,World</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web表单"><span class="nav-number">1.</span> <span class="nav-text">Web表单</span></a></li></ol></div>
             
 
           </div>
