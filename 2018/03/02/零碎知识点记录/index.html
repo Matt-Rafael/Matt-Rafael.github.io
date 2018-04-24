@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Python,Flask," />
+  <meta name="keywords" content="Python," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
-<meta name="keywords" content="Python,Flask">
+<meta name="description" content="该篇文章主要是包含Python的知识点">
+<meta name="keywords" content="Python">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Flask入门学习&lt;1&gt;">
-<meta property="og:url" content="http://yoursite.com/2018/02/15/Flask入门学习-1/index.html">
+<meta property="og:title" content="零碎知识点记录">
+<meta property="og:url" content="http://yoursite.com/2018/03/02/零碎知识点记录/index.html">
 <meta property="og:site_name" content="Matt Rafael的博客">
-<meta property="og:description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
+<meta property="og:description" content="该篇文章主要是包含Python的知识点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-24T15:41:08.000Z">
+<meta property="og:updated_time" content="2018-04-24T15:40:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Flask入门学习&lt;1&gt;">
-<meta name="twitter:description" content="该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单">
+<meta name="twitter:title" content="零碎知识点记录">
+<meta name="twitter:description" content="该篇文章主要是包含Python的知识点">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/15/Flask入门学习-1/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/03/02/零碎知识点记录/"/>
 
 
 
 
 
-  <title>Flask入门学习<1> | Matt Rafael的博客</title>
+  <title>零碎知识点记录 | Matt Rafael的博客</title>
   
 
 
@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/15/Flask入门学习-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/02/零碎知识点记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Matt Rafael">
@@ -270,7 +270,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Flask入门学习<1></h2>
+          <h2 class="post-title" itemprop="name headline">零碎知识点记录</h2>
         
 
         <div class="post-meta">
@@ -282,8 +282,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-15T21:17:26+08:00">
-                2018-02-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-02T22:47:40+08:00">
+                2018-03-02
               </time>
             
 
@@ -305,8 +305,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web开发/" itemprop="url" rel="index">
-                    <span itemprop="name">Web开发</span>
+                  <a href="/categories/Python学习/" itemprop="url" rel="index">
+                    <span itemprop="name">Python学习</span>
                   </a>
                 </span>
 
@@ -342,212 +342,69 @@
       
 
       
-        <p>该篇文章主要是包含Flask的基本入门：安装、基本的应用结构、模板、表单<br><a id="more"></a></p>
-<h4 id="安装Flask"><a href="#安装Flask" class="headerlink" title="安装Flask"></a>安装Flask</h4><p>虚拟环境是Python解释器的一份拷贝，可以在里面私有地安装包。</p>
-<pre><code>$ python3 -m venv matt 创建名字为matt的虚拟环境
-$ source matt/bin/activate 激活matt目录下的虚拟环境
-$ deactivate 取消当前的虚拟环境
-$ pip install flask 安装Flask
-$ pip freeze 列出当前安装的包
-</code></pre><h4 id="应用结构"><a href="#应用结构" class="headerlink" title="应用结构"></a>应用结构</h4><p>初始化</p>
-<pre><code>from flask import Flask
-app = Flask(__name__)
+        <p>该篇文章主要是包含Python的知识点<br><a id="more"></a></p>
+<h4 id="name变量"><a href="#name变量" class="headerlink" title="name变量"></a><strong>name</strong>变量</h4><ul>
+<li>当文件是被调用时，<strong>name</strong>的值为模块名；</li>
+<li>当文件被执行时，<strong>name</strong>的值为 <code>‘__main__’</code></li>
+</ul>
+<h4 id="特殊的格式"><a href="#特殊的格式" class="headerlink" title="特殊的格式"></a>特殊的格式</h4><ul>
+<li><code>r&#39;&#39;</code>表示<code>&#39;&#39;</code>内部的字符串默认不转义</li>
+<li><code>&#39;&#39;&#39;xxx&#39;&#39;&#39;</code>格式可以表示多行内容</li>
+</ul>
+<h4 id="整数的除法"><a href="#整数的除法" class="headerlink" title="整数的除法"></a>整数的除法</h4><ul>
+<li><code>/</code>除法计算结果是浮点数</li>
+<li><code>//</code>地板除法结果是整数</li>
+</ul>
+<h4 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h4><ul>
+<li><code>ord()</code> 获取字符的整数表示，<code>chr()</code>把编码转换为对应的字符</li>
+<li><p>字符串和字节(<code>b</code>前缀)转换：</p>
+<pre><code>b&apos;abc&apos;.decode(&apos;utf-8&apos;)，从网络或磁盘上读取的是字节流
+&apos;abc&apos;.encode(&apos;utf-8&apos;)
+</code></pre></li>
+<li><p>字符串的格式化</p>
+<pre><code>&apos;Hello, %s&apos; % &apos;World&apos;
+&apos;Hello, {0}&apos;.format(&apos;World&apos;)
+</code></pre></li>
+</ul>
+<h4 id="复杂的数据类型"><a href="#复杂的数据类型" class="headerlink" title="复杂的数据类型"></a>复杂的数据类型</h4><ul>
+<li>列表：<code>[&#39;a&#39;, &#39;b&#39;]</code></li>
+<li>元组：　<code>(&#39;a&#39;,&#39;b&#39;)</code></li>
+<li>字典：<code>[&#39;a&#39;: &#39;A&#39;, &#39;b&#39;: &#39;B&#39;]</code></li>
+<li>集合(set)：<code>{&#39;a&#39;, &#39;b&#39;}</code></li>
+</ul>
+<h4 id="if-的简写"><a href="#if-的简写" class="headerlink" title="if 的简写"></a>if 的简写</h4><p><code>if var</code>：如果var为零数值、空字符串、空列表、None，则为Flase</p>
+<h4 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h4><ul>
+<li><p>默认参数</p>
+<pre><code>def power(x, n = 1):
+    return x * n
+</code></pre></li>
+<li><p>可变参数</p>
+<pre><code>def calc(*numbers):
+    return len(number)
+</code></pre></li>
+<li><p>关键字参数：允许传入０个或多个包含参数名的参数</p>
+<pre><code>def person(name, age, **kw):
+    print(&apos;keyword&apos;)
+</code></pre></li>
+</ul>
+<h4 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h4><ul>
+<li><p>类的定义与使用：</p>
+<pre><code>class Student(object):
+    def __init__(self, name, score):
+        self.name = name
+            self.score = score
+    def print_score(self):
+        print(&apos;%s - %s&apos; % (self.name, self.score))
 
-所有的Flask应用必须创建应用实例，服务器将所有的请求都交给该对象处理。Flask使用__name__这个参数来决定应用的根路径。
-</code></pre><p>路由和视图函数</p>
-<pre><code>通过app.route装饰器来定义路由
-@app.route(&apos;/&apos;)
-def index():
-    return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
+student = Student(&apos;matt&apos;, 100)
+student.print_score()
 
-通过app.add_url_rule()方法来定义路由
-def index():
-    return &apos;&lt;h1&gt;Hello World&lt;h1&gt;&apos;
-app.add_url_rule(&apos;/&apos;, &apos;index&apos;, index)
+如果想要内部属性不被外部访问，可以把属性的名字前加上两个下划线__
+</code></pre></li>
+<li><p>判断对象类型</p>
+</li>
+</ul>
 
-使用&lt;&gt;来支持动态路由
-@app.route(&apos;/user/&lt;name&gt;&apos;)
-def user(name):
-    return &apos;&lt;h1&gt;Hello, {}&apos;.format(name)
-</code></pre><p>开发服务器</p>
-<pre><code>使用flask run命令开启服务器，该命令需要寻找包含应用实例的脚本
-$ export FLASK_APP=main.py
-$ flask run
-
-通过调用app.run()方法来语法式地开启服务器：
-if __name__ == &apos;__main__&apos;:
-    app.run()
-</code></pre><p>调试模式</p>
-<pre><code>调试模式下，开发服务器的两个模块reloader和debugger默认开启。源文件改变的时候，reloader会自动重启服务器。当应用抛出异常时，debugger就会出现在浏览器中。
-
-命令行开启调试模式：
-$ export FLASK_APP=main.py
-$ export FLASK_DEBUG=1
-$ flask run
-
-语法式开启调试模式：
-app.run(debug=True)
-</code></pre><h4 id="请求-响应"><a href="#请求-响应" class="headerlink" title="请求-响应"></a>请求-响应</h4><p>应用和请求上下文</p>
-<pre><code>Flask接收到来自客户端的请求时，需要让处理请求的视图函数能够获取到一些对象，比如request对象。
-
-Flask使用上下文来暂时让某些对象可全局获取：
-
-from flask import request
-@app.route(&apos;/&apos;)
-def index():
-        user_agent = request.headers.get(&apos;User_Agent&apos;)
-        return &apos;&lt;p&gt;Your browser is {} &lt;p&gt;&apos;.format(user_agent)
-
-
-    Flask的上下文全局变量：current_app、g、request、response
-</code></pre><p>   请求钩子</p>
-<pre><code>在请求被处理之前或之后执行代码，使用钩子来实现：
- before_first_request：第一个请求被处理之前执行
- before_request：每个请求被处理之前执行
- after_request：每个请求被处理之后执行，前提是没有异常发生
- teardown_request：每个请求被处理之后执行，就算异常发生
-</code></pre><p>   响应对象</p>
-<pre><code>返回tuple作为响应：
-@app.route(&apos;/&apos;)
-def index():
-    return &apos;&lt;h1&gt;Bad Request&lt;h1&gt;&apos;, 400
-
-返回response对象：
-from flask import make_response
-@app.route(&apos;/&apos;)
-def index():
-    response = make_response(&apos;&lt;h1&gt;This document carries a cookie&lt;h1&gt;&apos;)
-    response.set_cookie(&apos;answer&apos;, &apos;42&apos;)
-    return response
-
-
-重定向：
-from flask import redirect
-@app.route(&apos;/&apos;)
-def index():
-    return redirect(&apos;https://www.baidu.com&apos;)
-
-abort()函数用于错误处理：
-from flask import abort
-@app.route(&apos;/user/&lt;id&gt;&apos;)
-def get_user(id):
-    user = load_user(id)
-    if not user:
-        abort(404)
-    return &apos;&lt;h1&gt;Hello, {}&lt;h1&gt;&apos;.format(user.name)
-</code></pre><h4 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h4><pre><code>默认Flask寻找位于应用主目录下名字是templates子目录的模板
-
-templates/index.html：
-&lt;h1&gt;Hello, World&lt;/h1&gt;
-
-templates/user.html：
-&lt;h1&gt;Hello, {{ name }}&lt;h1&gt;
-
-main.py：
-from flask import Flask, render_template
-app = Flask(__name__)
-
-@app.route(&apos;/&apos;)
-def index():
-        return render_template(&apos;index.html&apos;)
-
-@app.route(&apos;/user/&lt;name&gt;&apos;)
-def user(name):
-        return render_template(&apos;user.html&apos;, name=name)
-
-    Jinja2识别任何类型的变量，甚至是列表，字典和对象。可以使用过滤器来修改变量：Hello, {{ name | capitalize }}
-</code></pre><p> 控制结构</p>
-<pre><code>{% if user %}
- 			Hello, {{ user }}
- 		{% else %}
- 			Hello, Stranger
- 		{% endif %}
-
-&lt;ul&gt;
-    {% for comment in comments %}
- 				<li> {{ comment }}</li>
- 			{% endfor %}
-&lt;/ul&gt;
-
-   多个地方用到的模板代码可以放在单独文件中：
-   {% include 'common.html' %}
-
-   模板继承：
-
-   base.html：
-   &lt;html&gt;
-   &lt;head&gt;
-   &lt;/head&gt;
-   &lt;body&gt;
-       {% block body %}
-    			{% endblock %}
-   &lt;/body&gt;
-   &lt;/html&gt;
-
-   detail.html：
-   {% extends "base.html" %}
-   &lt;html&gt;
-   &lt;head&gt;
-   &lt;/head&gt;
-   &lt;body&gt;
-        {% block body %}
-    				 <p>Hello,World</p>
-    			 {% endblock %}
-   &lt;/body&gt;
-   &lt;/html&gt;
-</code></pre><p>  Bootstra集成</p>
-<pre><code>$ pip install flask-bootstrap
-
-集成：
-from flask_bootstrap import Bootstrap
-bootstrap = Bootstrap(app)
-
-Flask-Bootstrap初始化后，应用便可获取包含Boostrap文件和基本结构的模板，然后利用Jinja2的模板继承的特点。
-</code></pre><p>自定义错误页</p>
-<pre><code>客户端请求的页面或路由不存在时，抛出404；应用有未处理的异常时，抛出500。
-@app.errorhandler(404)
-def  page_not_found(e):
-    return render_template(&apos;404.html&apos;), 404
-
-@app.errorhandler(500)
-def internal_server_error(e):
-    return render_template(&apos;500.html&apos;), 500
-</code></pre><p>链接</p>
-<pre><code>url_for()函数产生URL，该函数接收视图函数名或者端点名。
-url_for(&apos;index&apos;)返回相对路径
-url_for(&apos;index&apos;, _external=True)返回绝对路径
-
-动态URL可以通过传递参数来产生：
-url_for(&apos;user&apos;, name=&apos;matt&apos;, _external=True)
-
-查询字符串也可以作为参数传递：
-url_for(&apos;user&apos;, name=&apos;matt&apos;, page=1, _external=True) page就是查询字符串
-</code></pre><p>静态文件</p>
-<pre><code>静态文件默认放在应用根目录下名字叫static的子目录下。
-url_for(&apos;static&apos;, filename=&apos;css/style.css&apos;, _external=True)
-</code></pre><h4 id="Web表单"><a href="#Web表单" class="headerlink" title="Web表单"></a>Web表单</h4><pre><code>$ pip install flask-wtf
-
-Flask-WTF扩展不需要初始化，但是它需要应用配置secret key。
-app = Flask(__name__)
-app.config[&apos;SECRET_KEY&apos;] = &apos;secret_string&apos;
-</code></pre><p>表单类</p>
-<pre><code>from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
-
-class NameForm(FlaskForm):
-        name = StringField(&apos;What is your name?&apos;, validators=[DataRequired()])
-        submit = SubmitField(&apos;Submit&apos;)
-
-    @app.route(&apos;/&apos;, methods=[&apos;GET&apos;,&apos;POST&apos;])
-def index():
-        name = None
-       form = NameForm()
-        if form.validate_on_submit():
-                name = form.name.data
-             form.name.data = &apos;&apos;
-        return render_template(&apos;index.html&apos;, form=form, name=name)
-</code></pre>
       
     </div>
     
@@ -566,8 +423,6 @@ def index():
           
             <a href="/tags/Python/" rel="tag"># Python</a>
           
-            <a href="/tags/Flask/" rel="tag"># Flask</a>
-          
         </div>
       
 
@@ -579,14 +434,18 @@ def index():
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/02/23/Flask入门学习-2/" rel="next" title=" Flask入门学习<2>">
+                <i class="fa fa-chevron-left"></i>  Flask入门学习<2>
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/23/Flask入门学习-2/" rel="prev" title=" Flask入门学习<2>">
-                 Flask入门学习<2> <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/24/Shell学习-1/" rel="prev" title="Shell学习<1>">
+                Shell学习<1> <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -719,7 +578,7 @@ def index():
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Flask"><span class="nav-number">1.</span> <span class="nav-text">安装Flask</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用结构"><span class="nav-number">2.</span> <span class="nav-text">应用结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请求-响应"><span class="nav-number">3.</span> <span class="nav-text">请求-响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#模板"><span class="nav-number">4.</span> <span class="nav-text">模板</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Web表单"><span class="nav-number">5.</span> <span class="nav-text">Web表单</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#name变量"><span class="nav-number">1.</span> <span class="nav-text">name变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊的格式"><span class="nav-number">2.</span> <span class="nav-text">特殊的格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#整数的除法"><span class="nav-number">3.</span> <span class="nav-text">整数的除法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串处理"><span class="nav-number">4.</span> <span class="nav-text">字符串处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂的数据类型"><span class="nav-number">5.</span> <span class="nav-text">复杂的数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#if-的简写"><span class="nav-number">6.</span> <span class="nav-text">if 的简写</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数的参数"><span class="nav-number">7.</span> <span class="nav-text">函数的参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象编程"><span class="nav-number">8.</span> <span class="nav-text">面向对象编程</span></a></li></ol></div>
             
 
           </div>
